@@ -1,11 +1,22 @@
-import { collection, addDoc, getDocs, Timestamp,FieldValue } from "firebase/firestore";
+import { collection, addDoc, getDocs, Timestamp, FieldValue } from "firebase/firestore";
 import { db } from "../firebase/config";
+
+export interface Measurement {
+  label: string;   // e.g. "Length", "Diameter"
+  value: string;   // e.g. "6"
+  unit: string;    // e.g. "m", "mm"
+}
+
 export interface Product {
   name: string;
-  category: string;
+  category?: string;
   brand?: string;
   price?: string;
-  unit_of_measure: string;
+  currency: string;          // e.g. "PKR", "USD"
+  quantity?: string;         // e.g. "500"
+  quantity_unit?: string;    // e.g. "pcs", "kg"
+  unit_of_measure: string;   // backward compat — derived from first measurement unit
+  measurements: Measurement[];
   description: string;
   image_urls: string[];
   variants_color: string[];
@@ -15,6 +26,7 @@ export interface Product {
   created_at?: Timestamp | FieldValue;
   updated_at?: Timestamp | FieldValue;
 }
+
 const productsRef = collection(db, "products");
 
 export const addProduct = async (product: Product) => {

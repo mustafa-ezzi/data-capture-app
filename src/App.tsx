@@ -4,9 +4,9 @@ import ProductTable from "./pages/ProductTable";
 
 type Page = "form" | "table";
 
-const NAV_ITEMS: { id: Page; label: string; icon: string; description: string }[] = [
-  { id: "form",  label: "Add Product",  icon: "✦", description: "Create new listing" },
-  { id: "table", label: "All Products", icon: "▦", description: "Browse & export"    },
+const NAV_ITEMS: { id: Page; label: string; icon: string;  }[] = [
+  { id: "form",  label: "Add Product",  icon: "✦" },
+  { id: "table", label: "All Products", icon: "▦"  },
 ];
 
 export default function App() {
@@ -33,16 +33,11 @@ export default function App() {
         {!collapsed && (
           <div className="overflow-hidden">
             <p className="text-sm font-black text-white tracking-tight leading-none">DataCapture</p>
-            <p className="text-[10px] text-slate-400 mt-0.5 font-mono">Product Portal</p>
           </div>
         )}
       </div>
 
-      {/* Nav label */}
-      {!collapsed && (
-        <p className="text-[9px] font-black uppercase tracking-[0.18em] text-slate-500 px-5 pt-5 pb-2">Navigation</p>
-      )}
-
+      
       {/* Nav items */}
       <nav className="flex flex-col gap-1 px-2 mt-2 flex-1">
         {NAV_ITEMS.map(item => {
@@ -63,7 +58,6 @@ export default function App() {
               {!collapsed && (
                 <div className="min-w-0">
                   <p className={`text-xs font-semibold leading-tight truncate ${active ? "text-white" : ""}`}>{item.label}</p>
-                  <p className="text-[10px] text-slate-500 group-hover:text-slate-400 mt-0.5">{item.description}</p>
                 </div>
               )}
               {collapsed && (
@@ -76,23 +70,9 @@ export default function App() {
         })}
       </nav>
 
-      <div className="mx-4 border-t border-white/10 my-3" />
 
       {/* Quick stats */}
-      {!collapsed && (
-        <div className="mx-3 mb-3 rounded-xl bg-white/5 border border-white/10 p-3">
-          <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Quick Stats</p>
-          <div className="flex justify-between">
-            {[["Phase", "1 & 2"], ["Status", "Active"]].map(([k, v]) => (
-              <div key={k}>
-                <p className="text-[10px] text-slate-500">{k}</p>
-                <p className="text-xs font-bold text-white">{v}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
+      
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(c => !c)}

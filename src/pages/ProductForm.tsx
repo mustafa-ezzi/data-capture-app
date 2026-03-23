@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addProduct } from "../services/productService";
 import { serverTimestamp } from "firebase/firestore";
-import { uploadImage } from "../services/uploadimage";
+import { uploadImage } from "../services/uploadImage.js";
 
 const CATEGORIES = [
   "Metals > Brass", "Metals > Steel", "Metals > Aluminum", "Metals > Copper",

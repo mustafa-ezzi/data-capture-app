@@ -1,4 +1,4 @@
-export const uploadImage = async (file) => {
+export const uploadImage = async (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     // Check file size — Firestore doc limit is 1MB
     if (file.size > 800 * 1024) {
@@ -7,8 +7,15 @@ export const uploadImage = async (file) => {
     }
 
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result); // returns base64 string
-    reader.onerror = () => reject(new Error("Failed to read file"));
+
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Failed to read file"));
+    };
+
     reader.readAsDataURL(file);
   });
 };

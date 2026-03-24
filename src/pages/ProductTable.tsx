@@ -169,7 +169,7 @@ function Thumbnail({ urls }: { urls: string[] }) {
 
 // ── Columns ──────────────────────────────────────────────────────────────────
 
-const COLS = ["", "Product", "Category", "Measurements", "Price", "Status", "Language", "Created At"];
+const COLS = ["", "Product", "Category", "Measurements", "Price", "Status","Created At"];
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function ProductTable() {
@@ -210,10 +210,7 @@ export default function ProductTable() {
       <div className="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto flex items-start justify-between gap-3 flex-wrap">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Phase 2</span>
-              <span className="text-[10px] text-indigo-500 font-mono tracking-wider uppercase">/ Product Table</span>
-            </div>
+            
             <h1 className="text-xl font-bold text-slate-900 tracking-tight">All Products</h1>
             <p className="text-xs text-slate-400 mt-0.5">
               {loading ? "Loading…" : `${filtered.length} of ${products.length} product${products.length !== 1 ? "s" : ""}`}
@@ -389,13 +386,7 @@ export default function ProductTable() {
                           </span>
                         </td>
 
-                        {/* Language */}
-                        <td className="px-4 py-3">
-                          <span className="inline-block bg-indigo-50 text-indigo-600 text-xs font-mono font-medium px-2 py-0.5 rounded-md border border-indigo-100 uppercase">
-                            {p.language}
-                          </span>
-                        </td>
-
+                       
                         {/* Created At */}
                         <td className="px-4 py-3 text-xs text-slate-400 font-mono whitespace-nowrap">
                           {formatDate(p.created_at)}

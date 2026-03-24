@@ -13,6 +13,7 @@ export interface Product {
   brand?: string;
   price?: string;
   currency: string;          // e.g. "PKR", "USD"
+  price_unit?: string;       // e.g. "kg", "ft", "pcs" — the "per X" unit
   quantity?: string;         // e.g. "500"
   quantity_unit?: string;    // e.g. "pcs", "kg"
   unit_of_measure: string;   // backward compat — derived from first measurement unit

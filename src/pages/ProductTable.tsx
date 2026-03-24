@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
 
+interface Measurement {
+  label: string;
+  value: string;
+  unit: string;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -14,12 +20,13 @@ interface Product {
   status: string;
   language: string;
   created_at?: { seconds: number } | null;
+  measurements?: Measurement[];
 }
 
 const STATUS_BADGE: Record<string, string> = {
-  draft:    "bg-slate-100 text-slate-600 border-slate-200",
-  active:   "bg-emerald-50 text-emerald-700 border-emerald-200",
-  paused:   "bg-amber-50 text-amber-700 border-amber-200",
+  draft: "bg-slate-100 text-slate-600 border-slate-200",
+  active: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  paused: "bg-amber-50 text-amber-700 border-amber-200",
   archived: "bg-red-50 text-red-700 border-red-200",
 };
 const STATUS_DOT: Record<string, string> = {
@@ -145,9 +152,8 @@ function Thumbnail({ urls }: { urls: string[] }) {
                   <button
                     key={i}
                     onClick={() => setActiveIdx(i)}
-                    className={`w-14 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                      i === activeIdx ? "border-indigo-500" : "border-transparent hover:border-slate-300"
-                    }`}
+                    className={`w-14 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${i === activeIdx ? "border-indigo-500" : "border-transparent hover:border-slate-300"
+                      }`}
                   >
                     <img src={url} alt="" className="w-full h-full object-cover" />
                   </button>
@@ -163,8 +169,7 @@ function Thumbnail({ urls }: { urls: string[] }) {
 
 // ── Columns ──────────────────────────────────────────────────────────────────
 
-const COLS = ["", "Product", "Category", "Brand", "Price", "Unit", "Status", "Language", "Created At"];
-
+const COLS = ["", "Product", "Category", "Measurements", "Price", "Status", "Language", "Created At"];
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function ProductTable() {
@@ -345,9 +350,26 @@ export default function ProductTable() {
                         {/* Category */}
                         <td className="px-4 py-3 text-slate-600 whitespace-nowrap text-xs">{p.category}</td>
 
-                        {/* Brand */}
-                        <td className="px-4 py-3 text-slate-500 text-xs">
-                          {p.brand || <span className="text-slate-300">—</span>}
+                        <td className="px-4 py-3 min-w-[150px]">
+                          <div className="flex flex-wrap gap-1.5">
+                            {p.measurements && p.measurements.length > 0 ? (
+                              p.measurements.map((m, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex flex-col bg-slate-50 border border-slate-200 rounded px-2 py-1 min-w-[60px]"
+                                >
+                                  <span className="text-[9px] uppercase font-bold text-slate-400 leading-none mb-1">
+                                    {m.label}
+                                  </span>
+                                  <span className="text-xs font-mono text-indigo-700 leading-none">
+                                    {m.value} <span className="text-[10px] text-slate-500">{m.unit}</span>
+                                  </span>
+                                </div>
+                              ))
+                            ) : (
+                              <span className="text-slate-300 text-xs">—</span>
+                            )}
+                          </div>
                         </td>
 
                         {/* Price */}
@@ -357,12 +379,7 @@ export default function ProductTable() {
                             : <span className="text-slate-300">—</span>}
                         </td>
 
-                        {/* Unit */}
-                        <td className="px-4 py-3">
-                          <span className="inline-block bg-slate-100 text-slate-600 text-xs font-medium px-2 py-0.5 rounded-md">
-                            {p.unit_of_measure}
-                          </span>
-                        </td>
+                       
 
                         {/* Status */}
                         <td className="px-4 py-3">

@@ -703,7 +703,7 @@ export default function ProductForm() {
             Reset Form
           </button>
           <div className="flex flex-col-reverse sm:flex-row gap-2.5">
-            <button disabled={saving} onClick={() => submit("Draft")}
+            <button disabled={saving} onClick={() => submit("Active")}
               className="px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40 transition-all text-center">
               Save as Draft
             </button>

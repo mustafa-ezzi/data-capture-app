@@ -319,7 +319,7 @@ export default function ProductForm() {
     if (form.quantity && (isNaN(+form.quantity) || +form.quantity < 0)) e.quantity = "Enter a valid positive number";
     if (form.measurements.every(m => !m.label.trim() && !m.value.trim()))
       e.measurements = "Add at least one measurement";
-    if (!files.length) e.images = "At least one image is required";
+    // if (!files.length) e.images = "At least one image is required";
     return e;
   };
 

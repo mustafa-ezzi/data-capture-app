@@ -7,18 +7,18 @@ import { uploadImage } from "../services/uploadImage.js";
 
 const UNIT_OPTIONS = [
   "mm", "cm", "m", "km", "in", "ft",
-  "g", "kg", "ton",
+  "g", "kg", "ton", "bag",
   "ml", "L", "m²", "m³",
   "pcs", "box", "roll", "pair", "set",
 ];
 
-const QUANTITY_UNITS = ["pcs", "kg", "g", "ton", "m", "m²", "m³", "L", "box", "roll", "set"];
+const QUANTITY_UNITS = ["pcs", "kg", "g", "ton", "m", "m²", "m³", "L", "box", "roll","bag", "set"];
 
 // Price-per units — common units things are priced by
 const PRICE_UNITS = [
   "pcs", "kg", "g", "ton",
   "m", "cm", "ft", "in",
-  "m²", "m³", "L", "ml",
+  "m²", "m³", "L", "ml", "bag",
   "box", "roll", "pair", "set",
 ];
 
